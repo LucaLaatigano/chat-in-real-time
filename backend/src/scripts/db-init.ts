@@ -29,29 +29,39 @@ async function ensureDatabaseExists() {
   );
 
   if (checkDb.rowCount === 0) {
-    console.log(`📦 La base "${dbName}" no existía. Creándola...`);
-    await client.query(`CREATE DATABASE "${dbName}"`);
-    console.log(`✅ Base de datos "${dbName}" creada con éxito.`);
+    console.log(`📦 La base "${dbName}" no existía. Creándola con codificación UTF-8...`);
+    await client.query(`CREATE DATABASE "${dbName}" WITH TEMPLATE template0 ENCODING 'UTF8' LC_COLLATE 'C' LC_CTYPE 'C'`);
+    console.log(`✅ Base de datos "${dbName}" creada con éxito en UTF-8.`);
   }
 
   await client.end();
 }
 
-async function runSqlScript() {
+export async function initDatabase(closePoolOnFinish: boolean = false) {
   try {
     await ensureDatabaseExists();
 
     const sqlPath = path.join(__dirname, "schema.sql");
     const sql = fs.readFileSync(sqlPath, "utf8");
 
-    console.log("⏳ Ejecutando estructura en la base de datos...");
+    console.log("⏳ Verificando estructura de la base de datos...");
     await pool.query(sql);
-    console.log("✅ Tablas creadas con éxito en PostgreSQL.");
+    console.log("✅ Tablas listas en PostgreSQL.");
   } catch (error) {
-    console.error("❌ Error ejecutando el script:", error);
+    console.error("❌ Error ejecutando la inicialización de la base de datos:", error);
+    throw error;
   } finally {
-    await pool.end();
+    if (closePoolOnFinish) {
+      await pool.end();
+    }
   }
 }
 
-runSqlScript();
+const isDirectRun = process.argv[1] && (
+  path.resolve(process.argv[1]) === __filename ||
+  process.argv[1].endsWith("db-init.ts")
+);
+
+if (isDirectRun) {
+  initDatabase(true);
+}
