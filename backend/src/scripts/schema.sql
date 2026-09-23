@@ -10,7 +10,8 @@ CREATE TABLE IF NOT EXISTS users (
   identifier_code VARCHAR(20) UNIQUE NOT NULL,
   profile_photo TEXT,
   created_at TIMESTAMPTZ DEFAULT NOW(),
-  deleted_at TIMESTAMPTZ DEFAULT NULL
+  deleted_at TIMESTAMPTZ DEFAULT NULL,
+  online BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 -- Defining ENUM type for status in friendship
