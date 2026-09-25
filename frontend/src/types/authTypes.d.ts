@@ -4,9 +4,9 @@ type User = {
   user_id: UUID
   name: string,
   last_name: string
-  email: string
-  identifier_code: string
-  created_at: Date
+  email?: string
+  identifier_code?: string
+  created_at?: Date
 }
 export interface LoginInput {
   email: string,
@@ -14,5 +14,24 @@ export interface LoginInput {
 }
 export interface LoginResponse {
   success: true,
+  user: User
+}
+
+export interface MeResponse {
+  success: true
+  user: User
+}
+
+export interface SignUpInput {
+  name: string
+  last_name: string,
+  email: string,
+  profile_photo: string | null
+  password: string
+}
+
+export interface SignUpResponse {
+  success: true,
+  message: string,
   user: User
 }

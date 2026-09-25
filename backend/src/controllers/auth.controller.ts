@@ -30,4 +30,23 @@ export class AuthController {
       user: newUser
     })
   }
+
+  static async getMe(req: Request, res: Response) {
+    const token = req.cookies?.access_token
+    const data = await AuthService.getMe({ token })
+
+    return res.json({
+      success: true,
+      user: data
+    })
+  }
+
+  static async logOut(req: Request, res: Response) {
+    res
+      .clearCookie('access_token')
+      .json({
+        success: true,
+        message: 'Logout successfull'
+      })
+  }
 }

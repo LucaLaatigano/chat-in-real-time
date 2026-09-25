@@ -6,6 +6,7 @@ import { AppError } from "../errors/app.error.js"
 import dotenv from "dotenv"
 import type { UserDataSchema, UserToReturn } from "../types/user.types.js"
 import { generateIdentifierCode } from "../utils/indetifierCodeGenerator.js"
+import type { userAuth } from "../types/auth.types.js"
 
 dotenv.config()
 export class AuthService {
@@ -48,5 +49,10 @@ export class AuthService {
     if (!newUser) throw new AppError("account not created", 500)
 
     return newUser
+  }
+
+  static async getMe({ token }: { token: string }) {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as userAuth
+    return decoded
   }
 }

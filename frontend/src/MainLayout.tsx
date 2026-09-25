@@ -17,34 +17,15 @@ import {
   IconDotsVertical,
   IconMessagePlus,
   IconArrowRight,
+  IconUserQuestion,
+  IconUserPlus
 } from '@tabler/icons-react';
-import type { Chat } from './types/chat.types';
+import type { Chat } from './types/chat.types.d.ts';
 import { ChatBox } from './components/ChatBox';
-import { ChatLayout } from './components/ChatLayOut';
+import { ChatLayout } from './components/ChatLayout.tsx';
 
 const MOCK_CHATS: Chat[] = [
-  {
-    id: '1',
-    name: 'Grupo de Desarrollo',
-    avatar: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png',
-    lastMessage: 'Luca: Ya tenemos la estructura lista con Mantine',
-    time: '12:45',
-    unreadCount: 2,
-  },
-  {
-    id: '2',
-    name: 'María Gómez',
-    avatar: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-2.png',
-    lastMessage: 'Genial, avisame cuando esté listo el chat',
-    time: '11:20',
-  },
-  {
-    id: '3',
-    name: 'Canal General',
-    avatar: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-3.png',
-    lastMessage: 'Reunión de equipo a las 16hs',
-    time: 'Ayer',
-  },
+
 ];
 
 export const MainLayout = () => {
@@ -59,6 +40,7 @@ export const MainLayout = () => {
     setSelectedChatId(chatId);
     closeMobile();
   };
+  const filteredChats = MOCK_CHATS.filter((c) => c.name.toLowerCase().includes(search.toLowerCase()))
 
   return (
     <AppShell
@@ -76,7 +58,7 @@ export const MainLayout = () => {
             <Text fw={700} size="md">Chats</Text>
             <Group gap={6}>
               <ActionIcon variant="subtle" color="gray" radius="xl" title="Nuevo chat">
-                <IconMessagePlus size={20} />
+                <IconUserPlus size={20} />
               </ActionIcon>
               <ActionIcon variant="subtle" color="gray" radius="xl" title="Opciones">
                 <IconDotsVertical size={20} />
@@ -102,12 +84,20 @@ export const MainLayout = () => {
         <AppShell.Section
           grow component={ScrollArea}>
           <Box p="xs">
-            {MOCK_CHATS.filter((c) => c.name.toLowerCase().includes(search.toLowerCase())).map((chat) => {
-              const isSelected = chat.id === selectedChatId;
-              return (
-                <ChatBox isSelected={isSelected} chat={chat} handleSelectChat={handleSelectChat} />
-              );
-            })}
+            {MOCK_CHATS.length === 0 ? (
+              <Center>
+                <Text c="dimmed" size="sm">You don't have any chats availables</Text>
+              </Center>
+            )
+              : (
+                filteredChats.map((chat) => {
+                  const isSelected = chat.id === selectedChatId;
+                  return (
+                    <ChatBox isSelected={isSelected} chat={chat} handleSelectChat={handleSelectChat} />
+                  );
+                })
+              )
+            }
           </Box>
         </AppShell.Section>
       </AppShell.Navbar>
@@ -116,7 +106,7 @@ export const MainLayout = () => {
           <ChatLayout openMobile={openMobile} activeChat={activeChat} />
         ) : (
           <Center h="100%" bg="gray.0">
-            <Text c="dimmed">Selecciona un chat para comenzar</Text>
+            <Text c="dimmed">Select a chat to see the messages</Text>
           </Center>
         )}
       </AppShell.Main>

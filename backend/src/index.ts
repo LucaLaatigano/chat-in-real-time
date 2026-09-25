@@ -1,7 +1,7 @@
 import express, { type Request, type Response } from "express";
 import cookieParser from "cookie-parser";
 import { initDatabase } from "./scripts/db-init.js";
-import { authRouter } from "./routes/auth.route.js";
+import { authRouter } from "./routes/auth.routes.js";
 import { errorMiddleware } from "./middlewares/error.middleware.js";
 import { apiKeyMiddleware } from "./middlewares/apiKey.middleware.js";
 import cors from 'cors'
