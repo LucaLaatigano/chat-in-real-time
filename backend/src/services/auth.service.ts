@@ -1,12 +1,12 @@
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 import { AuthModel } from "../models/auth.model.js"
-import { UsersModel } from "../models/users.model.js"
+import { UsersModel } from "../models/user.model.js"
 import { AppError } from "../errors/app.error.js"
 import dotenv from "dotenv"
 import type { UserDataSchema, UserToReturn } from "../types/user.types.js"
 import { generateIdentifierCode } from "../utils/indetifierCodeGenerator.js"
-import type { userAuth } from "../types/auth.types.js"
+import type { UserAuth } from "../types/auth.types.js"
 
 dotenv.config()
 export class AuthService {
@@ -52,7 +52,7 @@ export class AuthService {
   }
 
   static async getMe({ token }: { token: string }) {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as userAuth
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as UserAuth
     return decoded
   }
 }

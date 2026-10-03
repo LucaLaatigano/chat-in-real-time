@@ -5,6 +5,7 @@ import { authRouter } from "./routes/auth.routes.js";
 import { errorMiddleware } from "./middlewares/error.middleware.js";
 import { apiKeyMiddleware } from "./middlewares/apiKey.middleware.js";
 import cors from 'cors'
+import { userRouter } from "./routes/user.routes.js";
 const app = express();
 const PORT = process.env.PORT ?? 3000;
 
@@ -23,8 +24,8 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 //Routers
-app.use("/api/auth", authRouter);
-
+app.use('/api/auth', authRouter);
+app.use('/api/users', userRouter)
 
 app.use(errorMiddleware)
 
