@@ -1,13 +1,16 @@
 import { UsersModel } from "../models/user.model.js";
+import type { UUID } from "../types/user.types.js";
 
 export class UserService {
-  static async searchByCode({ identifier_code }: { identifier_code: string }) {
-    const users = await UsersModel.searchByCode({ code: identifier_code })
+  static async searchByCode({ identifier_code, currentId }: { identifier_code: string, currentId: UUID }) {
+    const users = await UsersModel.searchByCode({ code: identifier_code, currentId })
     return users
   }
 
-  static async searchByName({ name = '' }: { name: string }) {
-    const users = await UsersModel.searchByAnyName({ name: name })
+  static async searchByName({ name = '', currentId }: { name: string, currentId: UUID }) {
+    const users = await UsersModel.searchByAnyName({ name: name, currentId })
     return users
   }
+
+
 }

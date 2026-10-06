@@ -4,6 +4,6 @@ export interface UserAuth {
   user_lastname: string
 }
 
-export interface UserReturnedPayload extends userAuth {
-  user_identifier_code: string,
+export interface UserReturnedPayload extends UserAuth {
+  user_identifier_code: string
 }

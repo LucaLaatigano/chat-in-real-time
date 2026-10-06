@@ -1,6 +1,6 @@
 import type { QueryResult } from "pg";
 import { pool } from "../config/db.config.js";
-import type { User, UserInSearch } from "../types/user.types.js";
+import type { User, UserInSearch, UUID, UserData } from "../types/user.types.js";
 
 export class UsersModel {
   static async findByEmail({ email }: { email: string }) {
@@ -11,7 +11,25 @@ export class UsersModel {
     return user.rows[0]
   }
 
-  static async searchByCode({ code }: { code: string }) {
+  static async findById({ user_id }: { user_id: UUID }) {
+    const user = await pool.query<UserData>(`
+      SELECT 
+        user_id,
+        name,
+        last_name,
+        email,
+        identifier_code,
+        profile_photo,
+        created_at
+        FROM users
+        WHERE user_id = $1
+      `, [user_id])
+
+    if (user.rowCount === 0) return null
+
+    return user
+  }
+  static async searchByCode({ code, currentId }: { code: string, currentId: UUID }) {
     const users: QueryResult<UserInSearch> = await pool.query(`
       SELECT 
           user_id,
@@ -23,16 +41,17 @@ export class UsersModel {
           created_at,
           online
         FROM users 
-          WHERE identifier_code = $1
-      `, [code])
+          WHERE identifier_code ILIKE $1
+          AND ($2::uuid IS NULL OR user_id != $2::uuid)
+      `, [code.trim(), currentId ?? null])
     if (users.rows.length === 0) return []
     return users.rows
   }
 
-  static async searchByAnyName({ name }: { name: string }) {
-    const searchTerm = `%${name}%`
+  static async searchByAnyName({ name, currentId }: { name: string, currentId: UUID }) {
+    const searchTerm = `%${name.trim()}%`
     const users = await pool.query<UserInSearch>(`
-      SELECT 
+      SELECT
           user_id,
           name,
           last_name,
@@ -42,25 +61,15 @@ export class UsersModel {
           created_at,
           online
         FROM users
-        WHERE name ILIKE $1
-
-        UNION 
-
-        SELECT 
-        user_id,
-            name,
-            last_name,
-            email,
-            identifier_code,
-            profile_photo,
-            created_at,
-            online
-          FROM users
-          WHERE last_name ILIKE $1
-
+        WHERE (
+          (name || ' ' || last_name) ILIKE $1
+          OR name ILIKE $1
+          OR last_name ILIKE $1
+        )
+        AND ($2::uuid IS NULL OR user_id != $2::uuid)
         LIMIT 20
-      `, [searchTerm])
-    if (users.rows.length === 0) return []
+      `, [searchTerm, currentId ?? null])
     return users.rows
   }
+
 }
