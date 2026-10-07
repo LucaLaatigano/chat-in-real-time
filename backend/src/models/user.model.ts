@@ -27,7 +27,7 @@ export class UsersModel {
 
     if (user.rowCount === 0) return null
 
-    return user
+    return user.rows[0]
   }
   static async searchByCode({ code, currentId }: { code: string, currentId: UUID }) {
     const users: QueryResult<UserInSearch> = await pool.query(`

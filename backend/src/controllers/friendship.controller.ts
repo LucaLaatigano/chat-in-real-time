@@ -90,4 +90,4 @@ export class FriendshipController {
     });
     res.json({ success: true, message: "User blocked successfully", friendship });
   }
-}
+}

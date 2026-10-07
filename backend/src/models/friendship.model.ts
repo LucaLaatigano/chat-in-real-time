@@ -103,7 +103,7 @@ export class FriendShipModel {
     else if (status === "block") {
       result = await pool.query<Friendship>(`
       UPDATE friendships SET status = 'blocked'
-      WHERE id_friendship = $1 AND id_user_friendship = $2
+      WHERE id_friendship = $1 AND (id_user = $2 OR id_user_friendship = $2)
       RETURNING *
       `, [friendshipId, user_id])
     }
