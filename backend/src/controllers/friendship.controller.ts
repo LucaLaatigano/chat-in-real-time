@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
 import { AppError } from "../errors/app.error.js";
 import { FriendshipService } from "../services/friendship.service.js";
-import type { UUID } from "../types/user.types.js";
+import type { UUID } from "../types/index.js";
 import { getIO } from "../config/socket.config.js";
 
 export class FriendshipController {

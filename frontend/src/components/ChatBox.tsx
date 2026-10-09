@@ -1,4 +1,4 @@
-import type { Chat } from "../types/chat.types.d.ts"
+import type { Chat } from "../types"
 import { UnstyledButton, Group, Avatar, Box, Text, Badge } from "@mantine/core"
 interface Props {
   chat: Chat

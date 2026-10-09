@@ -1,5 +1,5 @@
 import { request } from "./request.ts";
-import type { MeResponse, LoginInput, LoginResponse, SignUpResponse, SignUpInput } from "../types/authTypes";
+import type { MeResponse, LoginInput, LoginResponse, SignUpResponse, SignUpInput } from "../types";
 
 export const login = async (credentials: LoginInput) => {
   return await request<LoginResponse>('/auth/login', {

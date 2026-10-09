@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
 import { AppError } from "../errors/app.error.js";
 import { UserService } from "../services/user.service.js";
-import type { UUID } from "../types/user.types.js";
+import type { UUID } from "../types/index.js";
 
 export class UserController {
   static async search(req: Request, res: Response) {

@@ -1,7 +1,7 @@
 import { io, Socket } from "socket.io-client";
 import { queryClient } from "../lib/queryClient.js";
 import { notifications } from "@mantine/notifications"
-import type { FriendRequestAcceptedPayload, FriendRequestRejectedPayload, NewFriendshipPayload } from "../types/socket.types"
+import type { FriendRequestAcceptedPayload, FriendRequestRejectedPayload, NewFriendshipPayload } from "../types"
 
 
 const SOCKET_URL = import.meta.env.VITE_SOCKET_URL ?? ""
@@ -40,7 +40,7 @@ export const onFriendRequestAccepted = (data: FriendRequestAcceptedPayload) => {
 }
 
 export const onFriendRequestRejected = (data: FriendRequestRejectedPayload) => {
-  console.log("❌ Rechazo recibido:", data);
+  console.log("Rechazo recibido:", data);
   notifications.show({
     title: "Friendship request rejected",
     message: "Your friednship request has been rejected.",

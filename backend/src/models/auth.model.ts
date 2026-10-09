@@ -1,6 +1,6 @@
 import type { QueryResult } from "pg";
 import { pool } from "../config/db.config.js";
-import type { UserDataToInsert } from "../types/user.types.js";
+import type { UserDataToInsert } from "../types/index.js";
 export class AuthModel {
   static async createAcc({ data }: { data: UserDataToInsert }) {
     const { name, last_name, email, password, identifier_code } = data

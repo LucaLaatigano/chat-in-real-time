@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import type { LoginInput, LoginResponse } from "../types/authTypes.ts";
+import type { LoginInput, LoginResponse } from "../types";
 import { ApiError } from "../error/apiError.ts";
 import { login } from "../api/auth.ts";
 

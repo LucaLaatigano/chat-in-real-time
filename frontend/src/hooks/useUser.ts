@@ -8,6 +8,9 @@ export const useUser = () => {
       const data = await getMe()
       return data.user
     },
+    meta: {
+      ignoreGlobalError: true,
+    },
     retry: false,
     staleTime: 1000 * 60 * 5,
   })

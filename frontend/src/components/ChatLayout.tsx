@@ -1,6 +1,6 @@
 import { Box, Group, ActionIcon, Avatar, Text, Center, TextInput } from "@mantine/core"
 import { IconArrowLeft, IconDotsVertical, IconSend } from "@tabler/icons-react"
-import type { Chat } from "../types/chat.types.d.ts"
+import type { Chat } from "../types"
 
 interface Props {
   openMobile: () => void,

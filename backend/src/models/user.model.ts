@@ -1,6 +1,6 @@
 import type { QueryResult } from "pg";
 import { pool } from "../config/db.config.js";
-import type { User, UserInSearch, UUID, UserData } from "../types/user.types.js";
+import type { User, UserInSearch, UUID, UserData } from "../types/index.js";
 
 export class UsersModel {
   static async findByEmail({ email }: { email: string }) {

@@ -1,6 +1,6 @@
 import { useEffect, useContext, createContext } from "react"
 import { socket, onConnect, onConnectError, onNewFriendRequest, onFriendRequestAccepted, onFriendRequestRejected } from "../socket/socket.ts"
-import type { SocketContextValue } from "../types/socket.types"
+import type { SocketContextValue } from "../types"
 import { useUser } from "../hooks/useUser.ts"
 import { queryClient } from "../lib/queryClient.tsx"
 

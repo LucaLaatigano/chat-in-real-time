@@ -1,7 +1,6 @@
-import type { UUID } from "../types/user.types.js";
+import type { UUID, FriendshipStatus } from "../types/index.js";
 import { AppError } from "../errors/app.error.js";
 import { FriendShipModel } from "../models/friendship.model.js";
-import type { FriendshipStatus } from "../types/friendship.types.js";
 import { UsersModel } from "../models/user.model.js";
 
 

@@ -1,6 +1,6 @@
 import type { Socket } from "socket.io"
 import jwt from "jsonwebtoken"
-import type { UserReturnedPayload } from "../types/auth.types.js";
+import type { UserReturnedPayload } from "../types/index.js";
 
 export const socketAuthMiddleware = (socket: Socket, next: (err?: Error) => void) => {
   try {

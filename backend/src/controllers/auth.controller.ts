@@ -2,7 +2,7 @@ import type { Request, Response, NextFunction } from "express";
 import { AuthService } from "../services/auth.service.js";
 import { userDataSchema } from "../schemas/auth.schemas.js";
 import { AppError } from "../errors/app.error.js";
-import type { UserToReturn } from "../types/user.types.js";
+import type { UserToReturn } from "../types/index.js";
 export class AuthController {
   static async login(req: Request, res: Response) {
     const { email, password } = req.body

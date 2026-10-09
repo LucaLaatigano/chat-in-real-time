@@ -1,4 +1,4 @@
-import type { SearchUserResponse, ParamsInputForSearch } from "../types/user.types.js";
+import type { SearchUserResponse, ParamsInputForSearch } from "../types";
 import { request } from "./request.js";
 const IDENTIFIER_CODE_REGEX = /^[a-zA-Z]{2}\d{4}$/;
 export const detectSearchParam = (query: string): ParamsInputForSearch => {

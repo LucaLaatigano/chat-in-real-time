@@ -1,6 +1,5 @@
 import { pool } from "../config/db.config.js";
-import type { FriendshipStatus, Friendship, RecievedFriendRequest } from "../types/friendship.types.js";
-import type { UUID } from "../types/user.types.js";
+import type { FriendshipStatus, Friendship, RecievedFriendRequest, UUID } from "../types/index.js";
 
 export class FriendShipModel {
   static async createFriendship({ user_id, user_id_friendship }: { user_id: UUID, user_id_friendship: UUID }) {

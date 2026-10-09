@@ -20,7 +20,7 @@ import {
   IconUserQuestion,
   IconUserPlus
 } from '@tabler/icons-react';
-import type { Chat } from './types/chat.types.d.ts';
+import type { Chat } from './types';
 import { ChatBox } from './components/ChatBox';
 import { ChatLayout } from './components/ChatLayout.tsx';
 

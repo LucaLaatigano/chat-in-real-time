@@ -1,5 +1,4 @@
-import type { UUID } from "../types/authTypes";
-import type { PendingFriendshipsRequest, FriendshipRequestReturned, FriendshipChangingStatus } from "../types/friendship.types.js";
+import type { UUID, PendingFriendshipsRequest, FriendshipRequestReturned, FriendshipChangingStatus } from "../types";
 import { request } from "./request.js";
 
 export const sendFriendshipRequest = (toId: UUID) => {

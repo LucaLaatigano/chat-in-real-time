@@ -1,5 +1,5 @@
 import { UsersModel } from "../models/user.model.js";
-import type { UUID } from "../types/user.types.js";
+import type { UUID } from "../types/index.js";
 
 export class UserService {
   static async searchByCode({ identifier_code, currentId }: { identifier_code: string, currentId: UUID }) {

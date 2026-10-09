@@ -4,9 +4,8 @@ import { AuthModel } from "../models/auth.model.js"
 import { UsersModel } from "../models/user.model.js"
 import { AppError } from "../errors/app.error.js"
 import dotenv from "dotenv"
-import type { UserDataSchema, UserToReturn } from "../types/user.types.js"
+import type { UserDataSchema, UserToReturn, UserAuth } from "../types/index.js";
 import { generateIdentifierCode } from "../utils/indetifierCodeGenerator.js"
-import type { UserAuth } from "../types/auth.types.js"
 
 dotenv.config()
 export class AuthService {

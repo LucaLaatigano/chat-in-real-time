@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
 import { AppError } from "../errors/app.error.js";
 import jwt from "jsonwebtoken";
-import type { UserReturnedPayload } from "../types/auth.types.js";
+import type { UserReturnedPayload } from "../types/index.js";
 export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies?.access_token
   if (!token) return next(new AppError("not authenticated", 401))
